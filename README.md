@@ -1,5 +1,5 @@
-# 2024_inhatc
-2024 년 3학년 2학기 (A,C반)
+# 2026_inhatc
+2026 년 3학년 1학기 (A,B,C반)
 
 
 ## 라즈베리파이 초기 설정
@@ -15,12 +15,19 @@ sudo apt-get install ibus ibus-hangul -y
 sudo reboot
 ```
 
-## InfluxDB 설치 
-  - InfluxDB download key using wget
+## InfluxDB 설치
+  - 기존 키 삭제
 ```
-wget -q https://repos.influxdata.com/influxdata-archive_compat.key
-echo '393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c influxdata-archive_compat.key' | sha256sum -c && cat influxdata-archive_compat.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null
-echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main' | sudo tee /etc/apt/sources.list.d/influxdata.list
+  sudo rm /usr/share/keyrings/influxdata-archive_compat.gpg
+  sudo rm /etc/apt/sources.list.d/influxdata.list
+```
+  - InfluxDB download GPG key using wget
+```
+curl -fsSL https://repos.influxdata.com/influxdata-archive.key \
+| sudo gpg --dearmor -o /usr/share/keyrings/influxdata-archive.gpg
+echo "deb [signed-by=/usr/share/keyrings/influxdata-archive.gpg] \
+https://repos.influxdata.com/debian stable main" \
+| sudo tee /etc/apt/sources.list.d/influxdata.list
 ```
   - Packages are up to date && install Influxdb
 ```
