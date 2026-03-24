@@ -72,13 +72,15 @@ sudo apt-get update && sudo apt-get install grafana -y
 sudo systemctl start grafana-server
 sudo systemctl enable grafana-server
 ```
-## influxdb import with python
+
+## python venv 가상환경 설정
+```
+python -m venv (환경이름)
+source (환경이름)/bin/activate
+```
 ```
 pip install influxdb
-```
-  - hint: See PEP 668 for the detailed specification.
-```
-  sudo rm /usr/lib/python3.11/EXTERNALLY-MANAGED
+pip install pyserial
 ```
 
 # TelegramBot
