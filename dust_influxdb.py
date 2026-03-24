@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import time
 import requests, json
 from influxdb import InfluxDBClient as influxdb
@@ -32,6 +30,6 @@ while(True):
               client.write_points(data)
           except Exception as e:
               print("Exception write " + str(e))
-        finally:
-            client.close()
+          finally:
+              client.close()
       print("running influxdb OK")
