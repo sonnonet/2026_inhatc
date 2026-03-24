@@ -34,14 +34,6 @@ https://repos.influxdata.com/debian stable main" \
  sudo apt-get update && sudo apt-get install influxdb -y
 
 ```
-  - InfluxDB as a background service on startup
-```
-sudo service influxdb start
-```
-  - InfluxDB is status (service)
-```
-sudo service influxdb status
-```
   
 ## InfluxDB 데이터베이스 만들기
 
