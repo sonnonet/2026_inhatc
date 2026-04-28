@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:latest
+    container_name: next_db
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    volumes:
+      - next_db:/var/lib/mysql
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=nextcloud
+    networks:
+      - next-network
+    ports:
+      - 3380:3306
+
+  app:
+    image: nextcloud:latest
+    container_name: nextcloud
+    ports:
+      - 8090:80
+      - 8440:443
+    volumes:
+      - nextcloud:/var/www/html
+    restart: always
+    env_file: .env
+    environment:
+      - MYSQL_HOST=db:3306
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=nextcloud
+      - NEXTCLOUD_UPLOAD_LIMIT=100G
+
+    networks:
+      - next-network
+
+volumes:
+  next_db:
+  nextcloud:
+
+networks:
+  next-network:
